@@ -1,22 +1,22 @@
 /MAKING A PROGRAM CALCULATE THE RESULT OF MULTIPLYING
 
 ////////////////////////PROMPT FOR INPUTS/////////////////////////////
-LOAD prompt  
-OUTPUT         /prompt >
+START,  LOAD prompt  
+        OUTPUT         /prompt >
 
-INPUT          /receive first input
-STORE X  
-OUTPUT
+        INPUT          /receive first input
+        STORE X  
+        OUTPUT
 
-LOAD star      /prompt *
-OUTPUT
+        LOAD star      /prompt *
+        OUTPUT
 
-INPUT          /receive second input
-STORE Y
-OUTPUT
+        INPUT          /receive second input
+        STORE Y
+        OUTPUT
 
-LOAD equal     /prompt =
-OUTPUT
+        LOAD equal     /prompt =
+        OUTPUT
 
 //////////////////// MULTIPLYING ////////////////////////////////////
    
@@ -56,7 +56,29 @@ DONE,         LOAD result
               OUTPUT
 
 //////////////////// MULTIPLYING ////////////////////////////////////
+
+/-----------------------LOOP CALCULATION ---------------------------/
+
+   /** RESET ALL VALUE **
+     LOAD zero
+     STORE result
+     STORE X
+     STORE Y
+
+  INPUT 
+  SUBT end
+  SKIPCOND 400
+  JUMP START          /Jump back to start again
+
+/BYE 
+  LOAD a
+  OUTPUT
+  LOAD b
+  OUTPUT
+  LOAD c
+  OUTPUT
  
+/-----------------------end LOOP CALCULATION ------------------------/
 
 HALT           /STOPPING
 
@@ -70,3 +92,9 @@ zero,     DEC 0
 X,        DEC 0
 Y,        DEC 0
 result,   DEC 0
+input,    DEC 0
+end,      DEC 33
+a, DEC 66
+b, DEC 89
+c, DEC 69
+

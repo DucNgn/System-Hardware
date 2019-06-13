@@ -1,53 +1,53 @@
      Assembly listing for: ASSIGNMENT.mas
-                Assembled: Thu Jun 13 16:18:42 EDT 2019
+                Assembled: Thu Jun 13 17:23:26 EDT 2019
 
          |                                      /MAKING A PROGRAM CALCULATE THE RESULT OF MULTIPLYING
          |                                      
          |                                      ////////////////////////PROMPT FOR INPUTS/////////////////////////////
-000 1025 |               LOAD prompt             
+000 1033 |  START        LOAD prompt             
 001 6000 |               OUTPUT                 /prompt >
          |                                      
 002 5000 |               INPUT                  /receive first input
-003 202A |               STORE X                 
+003 2038 |               STORE X                 
 004 6000 |               OUTPUT                  
          |                                      
-005 1026 |               LOAD star              /prompt *
+005 1034 |               LOAD star              /prompt *
 006 6000 |               OUTPUT                  
          |                                      
 007 5000 |               INPUT                  /receive second input
-008 202B |               STORE Y                 
+008 2039 |               STORE Y                 
 009 6000 |               OUTPUT                  
          |                                      
-00A 1027 |               LOAD equal             /prompt =
+00A 1035 |               LOAD equal             /prompt =
 00B 6000 |               OUTPUT                  
          |                                      
          |                                      //////////////////// MULTIPLYING ////////////////////////////////////
          |                                         
          |                                      /<---------------------------checking zeros ---------------------------------->        
-00C 102A |  CheckZeroX   LOAD X                 /check the case if input for X a zero
+00C 1038 |  CheckZeroX   LOAD X                 /check the case if input for X a zero
 00D 8400 |               SKIPCOND 400            
 00E 9010 |               JUMP CheckZeroY        /X is not a zero, continue testing for Y
 00F 9014 |               JUMP FoundZero          
          |                                      
-010 102B |  CheckZeroY   LOAD Y                 /check the case if input for Y a zero
+010 1039 |  CheckZeroY   LOAD Y                 /check the case if input for Y a zero
 011 8400 |               SKIPCOND 400            
 012 9017 |               JUMP loopMultiply      /X and Y are NOT zero, perform multiplying
 013 9014 |               JUMP FoundZero          
          |                                      
-014 102C |  FoundZero    LOAD result            / Found 1 zero in one of 2 inputs
-015 2029 |               STORE zero              
+014 103A |  FoundZero    LOAD result            / Found 1 zero in one of 2 inputs
+015 2037 |               STORE zero              
 016 9022 |               JUMP DONE               
          |                                      /<--------------------------- zeros handled ---------------------------------->  
          |                                      
          |                                      /------------------------LOOP FOR MULTIPLYING---------------------------------
-017 102C |  loopMultiply LOAD result             
-018 302A |               ADD X                   
-019 202C |               STORE result            
+017 103A |  loopMultiply LOAD result             
+018 3038 |               ADD X                   
+019 203A |               STORE result            
 01A 901B |               JUMP checkCounter       
          |                                      
-01B 102B |  checkCounter LOAD Y                  
-01C 4028 |               SUBT one                
-01D 202B |               STORE Y                 
+01B 1039 |  checkCounter LOAD Y                  
+01C 4036 |               SUBT one                
+01D 2039 |               STORE Y                 
 01E 8400 |               SKIPCOND 400            
 01F 9017 |               JUMP loopMultiply       
 020 A000 |               CLEAR                   
@@ -55,24 +55,52 @@
          |                                      
          |                                      /------------------------end of LOOP FOR MULTIPLYING---------------------------------
          |                                      
-022 102C |  DONE         LOAD result             
+022 103A |  DONE         LOAD result             
 023 6000 |               OUTPUT                  
          |                                      
          |                                      //////////////////// MULTIPLYING ////////////////////////////////////
-         |                                       
          |                                      
-024 7000 |               HALT                   /STOPPING
+         |                                      /-----------------------LOOP CALCULATION ---------------------------/
+         |                                      
+         |                                         /** RESET ALL VALUE **
+024 1037 |               LOAD zero               
+025 203A |               STORE result            
+026 2038 |               STORE X                 
+027 2039 |               STORE Y                 
+         |                                      
+028 5000 |               INPUT                   
+029 403C |               SUBT end                
+02A 8400 |               SKIPCOND 400            
+02B 9000 |               JUMP START             /Jump back to start again
+         |                                      
+         |                                      /BYE 
+02C 103D |               LOAD a                  
+02D 6000 |               OUTPUT                  
+02E 103E |               LOAD b                  
+02F 6000 |               OUTPUT                  
+030 103F |               LOAD c                  
+031 6000 |               OUTPUT                  
+         |                                       
+         |                                      /-----------------------end LOOP CALCULATION ------------------------/
+         |                                      
+032 7000 |               HALT                   /STOPPING
          |                                      
          |                                                   /       DECLARE VARIABLES      /
          |                                      
-025 003E |  prompt       DEC 62                  
-026 002A |  star         DEC 42                  
-027 003D |  equal        DEC 61                  
-028 0001 |  one          DEC 1                   
-029 0000 |  zero         DEC 0                   
-02A 0000 |  X            DEC 0                   
-02B 0000 |  Y            DEC 0                   
-02C 0000 |  result       DEC 0                   
+033 003E |  prompt       DEC 62                  
+034 002A |  star         DEC 42                  
+035 003D |  equal        DEC 61                  
+036 0001 |  one          DEC 1                   
+037 0000 |  zero         DEC 0                   
+038 0000 |  X            DEC 0                   
+039 0000 |  Y            DEC 0                   
+03A 0000 |  result       DEC 0                   
+03B 0000 |  input        DEC 0                   
+03C 0021 |  end          DEC 33                  
+03D 0042 |  a            DEC 66                  
+03E 0059 |  b            DEC 89                  
+03F 0045 |  c            DEC 69                  
+         |                                      
 
 Assembly successful.
 
@@ -84,16 +112,22 @@ Assembly successful.
           CheckZeroY   |   010   | 00E
           DONE         |   022   | 016, 021
           FoundZero    |   014   | 00F, 013
-          X            |   02A   | 003, 00C, 018
-          Y            |   02B   | 008, 010, 01B, 01D
+          START        |   000   | 02B
+          X            |   038   | 003, 00C, 018, 026
+          Y            |   039   | 008, 010, 01B, 01D, 027
+          a            |   03D   | 02C
+          b            |   03E   | 02E
+          c            |   03F   | 030
           checkCounter |   01B   | 01A
-          equal        |   027   | 00A
+          end          |   03C   | 029
+          equal        |   035   | 00A
+          input        |   03B   | 
           loopMultiply |   017   | 012, 01F
-          one          |   028   | 01C
-          prompt       |   025   | 000
-          result       |   02C   | 014, 017, 019, 022
-          star         |   026   | 005
-          zero         |   029   | 015
+          one          |   036   | 01C
+          prompt       |   033   | 000
+          result       |   03A   | 014, 017, 019, 022, 025
+          star         |   034   | 005
+          zero         |   037   | 015, 024
          --------------------------------------------------------
 
 

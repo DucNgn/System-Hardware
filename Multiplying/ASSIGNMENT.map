@@ -5,14 +5,20 @@
  CheckZeroY   |   010
  DONE         |   022
  FoundZero    |   014
- X            |   02A
- Y            |   02B
+ START        |   000
+ X            |   038
+ Y            |   039
+ a            |   03D
+ b            |   03E
+ c            |   03F
  checkCounter |   01B
- equal        |   027
+ end          |   03C
+ equal        |   035
+ input        |   03B
  loopMultiply |   017
- one          |   028
- prompt       |   025
- result       |   02C
- star         |   026
- zero         |   029
+ one          |   036
+ prompt       |   033
+ result       |   03A
+ star         |   034
+ zero         |   037
 
