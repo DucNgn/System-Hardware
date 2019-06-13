@@ -1,0 +1,100 @@
+     Assembly listing for: ASSIGNMENT.mas
+                Assembled: Thu Jun 13 15:52:35 EDT 2019
+
+         |                                      /MAKING A PROGRAM CALCULATE THE RESULT OF MULTIPLYING
+         |                                      
+         |                                      ////////////////////////PROMPT FOR INPUTS/////////////////////////////
+000 1029 |               LOAD prompt             
+001 6000 |               OUTPUT                 /prompt >
+         |                                      
+002 5000 |               INPUT                  /receive first input
+003 202E |               STORE X                 
+004 6000 |               OUTPUT                  
+         |                                      
+005 102A |               LOAD star              /prompt *
+006 6000 |               OUTPUT                  
+         |                                      
+007 5000 |               INPUT                  /receive second input
+008 202F |               STORE Y                 
+009 6000 |               OUTPUT                  
+         |                                      
+00A 102B |               LOAD equal             /prompt =
+00B 6000 |               OUTPUT                  
+         |                                      
+00C 000E |               JNS MULTIPLY           /Call multiply to perform the multyplying operand
+         |                                      
+00D 7000 |               HALT                   /STOPPING
+         |                                      
+         |                                      //////////////////// MULTIPLYING ////////////////////////////////////
+         |                                      
+00E 9010 |  MULTIPLY     JUMP CheckZeroX        /Call checking
+00F 9026 |               JUMP DONE               
+         |                                                
+010 102E |  CheckZeroX   LOAD X                 /check the case if input for X a zero
+011 8400 |               SKIPCOND 400            
+012 9014 |               JUMP CheckZeroY        /X is not a zero, continue testing for Y
+013 9018 |               JUMP FoundZero          
+         |                                      
+014 102F |  CheckZeroY   LOAD Y                 /check the case if input for Y a zero
+015 8400 |               SKIPCOND 400            
+016 901B |               JUMP loopMultiply      /X and Y are NOT zero, perform multiplying
+017 9018 |               JUMP FoundZero          
+         |                                      
+018 1030 |  FoundZero    LOAD result            / Found 1 zero in one of 2 inputs
+019 202D |               STORE zero              
+01A 9026 |               JUMP DONE               
+         |                                      
+01B 1030 |  loopMultiply LOAD result             
+01C 302E |               ADD X                   
+01D 2030 |               STORE result            
+01E 901F |               JUMP checkCounter       
+         |                                      
+01F 102F |  checkCounter LOAD Y                  
+020 402C |               SUBT one                
+021 202F |               STORE Y                 
+022 8400 |               SKIPCOND 400            
+023 901B |               JUMP loopMultiply       
+024 A000 |               CLEAR                   
+025 9026 |               JUMP DONE               
+         |                                      
+026 1030 |  DONE         LOAD result             
+027 6000 |               OUTPUT                  
+028 C00E |               JUMPI MULTIPLY         /returning
+         |                                      
+         |                                      //////////////////// MULTIPLYING ////////////////////////////////////
+         |                                       
+         |                                                   /       DECLARE VARIABLES      /
+         |                                      
+029 003E |  prompt       DEC 62                  
+02A 002A |  star         DEC 42                  
+02B 003D |  equal        DEC 61                  
+02C 0001 |  one          DEC 1                   
+02D 0000 |  zero         DEC 0                   
+02E 0000 |  X            DEC 0                   
+02F 0000 |  Y            DEC 0                   
+030 0000 |  result       DEC 0                   
+
+Assembly successful.
+
+         SYMBOL TABLE
+         --------------------------------------------------------
+          Symbol       | Defined | References 
+         --------------+---------+-------------------------------
+          CheckZeroX   |   010   | 00E
+          CheckZeroY   |   014   | 012
+          DONE         |   026   | 00F, 01A, 025
+          FoundZero    |   018   | 013, 017
+          MULTIPLY     |   00E   | 00C, 028
+          X            |   02E   | 003, 010, 01C
+          Y            |   02F   | 008, 014, 01F, 021
+          checkCounter |   01F   | 01E
+          equal        |   02B   | 00A
+          loopMultiply |   01B   | 016, 023
+          one          |   02C   | 020
+          prompt       |   029   | 000
+          result       |   030   | 018, 01B, 01D, 026
+          star         |   02A   | 005
+          zero         |   02D   | 019
+         --------------------------------------------------------
+
+

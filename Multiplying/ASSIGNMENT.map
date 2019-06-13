@@ -1,0 +1,19 @@
+ -----------------------
+ Symbol       | Location
+ -------------+---------
+ CheckZeroX   |   010
+ CheckZeroY   |   014
+ DONE         |   026
+ FoundZero    |   018
+ MULTIPLY     |   00E
+ X            |   02E
+ Y            |   02F
+ checkCounter |   01F
+ equal        |   02B
+ loopMultiply |   01B
+ one          |   02C
+ prompt       |   029
+ result       |   030
+ star         |   02A
+ zero         |   02D
+

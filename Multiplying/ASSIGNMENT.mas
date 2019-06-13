@@ -1,0 +1,72 @@
+/MAKING A PROGRAM CALCULATE THE RESULT OF MULTIPLYING
+
+////////////////////////PROMPT FOR INPUTS/////////////////////////////
+LOAD prompt  
+OUTPUT         /prompt >
+
+INPUT          /receive first input
+STORE X  
+OUTPUT
+
+LOAD star      /prompt *
+OUTPUT
+
+INPUT          /receive second input
+STORE Y
+OUTPUT
+
+LOAD equal     /prompt =
+OUTPUT
+
+JNS MULTIPLY   /Call multiply to perform the multyplying operand
+
+HALT           /STOPPING
+
+//////////////////// MULTIPLYING ////////////////////////////////////
+
+MULTIPLY,     JUMP CheckZeroX        /Call checking
+              JUMP DONE
+          
+CheckZeroX,   LOAD X                 /check the case if input for X a zero
+              SKIPCOND 400
+              JUMP CheckZeroY        /X is not a zero, continue testing for Y
+              JUMP FoundZero
+
+CheckZeroY,   LOAD Y                 /check the case if input for Y a zero
+              SKIPCOND 400
+              JUMP loopMultiply      /X and Y are NOT zero, perform multiplying
+              JUMP FoundZero    
+
+FoundZero,    LOAD result            / Found 1 zero in one of 2 inputs
+              STORE zero
+              JUMP DONE
+
+loopMultiply, LOAD result
+              ADD X
+              STORE result
+              JUMP checkCounter
+
+checkCounter, LOAD Y
+              SUBT one
+              STORE Y
+              SKIPCOND 400
+              JUMP loopMultiply
+              CLEAR
+              JUMP DONE
+
+DONE,         LOAD result
+              OUTPUT
+              JUMPI MULTIPLY         /returning
+
+//////////////////// MULTIPLYING ////////////////////////////////////
+ 
+             /       DECLARE VARIABLES      /
+
+prompt,   DEC 62
+star,     DEC 42
+equal,    DEC 61
+one,      DEC 1
+zero,     DEC 0
+X,        DEC 0
+Y,        DEC 0
+result,   DEC 0
