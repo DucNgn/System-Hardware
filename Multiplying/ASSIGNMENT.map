@@ -1,18 +1,0 @@
- -----------------------
- Symbol       | Location
- -------------+---------
- CheckZeroX   |   00C
- CheckZeroY   |   010
- DONE         |   022
- FoundZero    |   014
- X            |   02A
- Y            |   02B
- checkCounter |   01B
- equal        |   027
- loopMultiply |   017
- one          |   028
- prompt       |   025
- result       |   02C
- star         |   026
- zero         |   029
-
