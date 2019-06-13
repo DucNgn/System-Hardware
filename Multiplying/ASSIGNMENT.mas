@@ -18,15 +18,9 @@ OUTPUT
 LOAD equal     /prompt =
 OUTPUT
 
-JNS MULTIPLY   /Call multiply to perform the multyplying operand
-
-HALT           /STOPPING
-
 //////////////////// MULTIPLYING ////////////////////////////////////
-
-MULTIPLY,     JUMP CheckZeroX        /Call checking
-              JUMP DONE
-          
+   
+/<---------------------------checking zeros ---------------------------------->        
 CheckZeroX,   LOAD X                 /check the case if input for X a zero
               SKIPCOND 400
               JUMP CheckZeroY        /X is not a zero, continue testing for Y
@@ -40,7 +34,9 @@ CheckZeroY,   LOAD Y                 /check the case if input for Y a zero
 FoundZero,    LOAD result            / Found 1 zero in one of 2 inputs
               STORE zero
               JUMP DONE
+/<--------------------------- zeros handled ---------------------------------->  
 
+/------------------------LOOP FOR MULTIPLYING---------------------------------
 loopMultiply, LOAD result
               ADD X
               STORE result
@@ -54,12 +50,16 @@ checkCounter, LOAD Y
               CLEAR
               JUMP DONE
 
+/------------------------end of LOOP FOR MULTIPLYING---------------------------------
+
 DONE,         LOAD result
               OUTPUT
-              JUMPI MULTIPLY         /returning
 
 //////////////////// MULTIPLYING ////////////////////////////////////
  
+
+HALT           /STOPPING
+
              /       DECLARE VARIABLES      /
 
 prompt,   DEC 62
